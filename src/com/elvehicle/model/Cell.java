@@ -39,6 +39,6 @@ public class Cell {
 	
 	@Override
 	public int hashCode() {
-		return this.x * 11 + this.y;
+		return this.x * 11 + this.y * 17;
 	}
 }

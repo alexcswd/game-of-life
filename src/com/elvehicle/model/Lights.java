@@ -32,9 +32,7 @@ public class Lights {
 	public void spark(Cell cell) {
 		Set<Cell> adjacentCells = getAdjacentCells(cell);
 		for (Cell adjacentCell : adjacentCells) {
-			if (! litCellsBrightness.containsKey(adjacentCell)) {
-				litCellsBrightness.put(adjacentCell, new AtomicInteger(0));
-			}
+			litCellsBrightness.putIfAbsent(adjacentCell, new AtomicInteger());
 			litCellsBrightness.get(adjacentCell).incrementAndGet();
 		}
 	}
@@ -74,9 +72,7 @@ public class Lights {
 		// | 1 | 2 | 2 | 1 |   |
 		// '---'---'---'---'---'
 		StringBuffer sb = new StringBuffer(".");
-		for (int i = 1; i <= dim+1; i++) {
-			sb.append("---.");
-		}
+		sb.append("---.".repeat(dim+1));
 		sb.append("\n");
 		for (int i = 1; i <= dim+1; i++) {
 			sb.append("|");
@@ -88,16 +84,12 @@ public class Lights {
 			sb.append("\n");
 			if (i == dim+1) {
 				sb.append("'");
-				for (int d = 1; d <= dim+1; d++) {
-					sb.append("---'");
-				}
+				sb.append("---'".repeat(dim+1));
 				sb.append("\n");
 				
 			} else {
 				sb.append("|");
-				for (int d = 1; d <= dim+1; d++) {
-					sb.append("---|");
-				}
+				sb.append("---|".repeat(dim+1));
 				sb.append("\n");
 			}
 		}

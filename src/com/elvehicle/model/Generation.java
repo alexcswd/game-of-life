@@ -71,29 +71,23 @@ public class Generation {
 		// |   | x | x |   |   |
 		// '---'---'---'---'---'
 		StringBuffer sb = new StringBuffer(".");
-		for (int i = 1; i <= dim+1; i++) {
-			sb.append("---.");
-		}
+		sb.append("---.".repeat(dim+1));
 		sb.append("\n");
 		for (int i = 1; i <= dim+1; i++) {
 			sb.append("|");
 			for (int j = 1; j <= dim+1; j++) {
-				String cell = cells.contains(new Cell(i, j)) ? " x |" : "   |";
+				String cell = cells.contains(new Cell(j, i)) ? " x |" : "   |";
 				sb.append(cell);
 			}
 			sb.append("\n");
 			if (i == dim+1) {
 				sb.append("'");
-				for (int d = 1; d <= dim+1; d++) {
-					sb.append("---'");
-				}
+				sb.append("---'".repeat(dim+1));
 				sb.append("\n");
 				
 			} else {
 				sb.append("|");
-				for (int d = 1; d <= dim+1; d++) {
-					sb.append("---|");
-				}
+				sb.append("---|".repeat(dim+1));
 				sb.append("\n");
 			}
 		}
